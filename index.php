@@ -17,105 +17,148 @@ $resPropiedades = $conect->query($sqlPropiedades);
     <title>UTN Solutions Real Estate</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
-    <style>
-        body { font-family: 'Segoe UI', sans-serif; background-color: #f8f9fa; }
+<style>
+    <?php
+        $color1 = $config['color_tema1']; 
+        $color2 = $config['color_tema2']; 
+        $color3 = $config['color_tema3']; 
+    ?>
 
-        /* HEADER */
-        .header-top { display: flex; justify-content: space-between; align-items: center; padding: 10px 30px; background: #fff; border-bottom: 1px solid #ddd; }
-        .header-left { display: flex; align-items: center; gap: 15px; }
-        .header-left img { height: 60px; }
-        .header-left .social-icons i { font-size: 20px; margin-right: 10px; color: #333; }
-        .header-right { text-align: right; }
-        .header-right img { height: 50px; cursor: pointer; }
-        .nav-links { text-align: right; margin-top: 5px; }
-        .nav-links a { margin-left: 15px; color: #333; font-weight: 500; text-decoration: none; }
-        .nav-links a:hover { text-decoration: underline; }
+    body { 
+        font-family: 'Segoe UI', sans-serif; 
+        background-color: #f8f9fa; 
+    }
 
-        /* BANNER */
-        .banner { background-size: cover; background-position: center; height: 400px; color: white; display: flex; align-items: center; justify-content: center; text-shadow: 2px 2px 6px #000; }
-        .section-title { margin: 50px 0 30px; text-align: center; color: white; }
+    /* HEADER */
+    .header-top { display: flex; justify-content: space-between; align-items: center; padding: 10px 30px; background: <?= $color2 ?>; border-bottom: 1px solid #ddd; }
+    .header-left { display: flex; align-items: center; gap: 15px; }
+    .header-left img { height: 60px; }
+    .header-left .social-icons i { font-size: 20px; margin-right: 10px; color: #333; }
+    .header-right { text-align: right; }
+    .header-right img { height: 50px; cursor: pointer; }
+    .nav-links { text-align: right; margin-top: 5px; }
+    .nav-links a { margin-left: 15px; color: #333; font-weight: 500; text-decoration: none; }
+    .nav-links a:hover { text-decoration: underline; }
 
-        /* PROPIEDADES */
-        .prop-card { border-radius: 10px; padding: 15px; margin-bottom: 30px; transition: transform 0.2s; position: relative; cursor: pointer; }
-        .prop-card:hover { transform: scale(1.03); box-shadow: 0 5px 15px rgba(0,0,0,0.2); }
+    /* BANNER */
+    .banner { background-size: cover; background-position: center; height: 400px; color: <?= $color2 ?>; display: flex; align-items: center; justify-content: center; text-shadow: 2px 2px 6px #000; }
+    .section-title { margin: 50px 0 30px; text-align: center; color: <?= $color2 ?>; }
 
-        .prop-card img { width: 100%; height: 200px; object-fit: cover; border-radius: 5px; }
+    /* PROPIEDADES */
+    .prop-card { border-radius: 10px; padding: 15px; margin-bottom: 30px; transition: transform 0.2s; position: relative; cursor: pointer; }
+    .prop-card:hover { transform: scale(1.03); box-shadow: 0 5px 15px rgba(0,0,0,0.2); }
+    .prop-card img { width: 100%; height: 200px; object-fit: cover; border-radius: 5px; }
 
-        /* CENTRAR contenido de las tarjetas */
-        .prop-card h5,
-        .prop-card p,
-        .prop-card .precio {
-            text-align: center;
-        }
+    /* Centrar contenido de las tarjetas */
+    .prop-card h5,
+    .prop-card p,
+    .prop-card .precio { text-align: center; }
 
-        /* TODA LA TARJETA CLICKABLE */
-        .prop-card a.full-link {
-            position: absolute;
-            top:0;
-            left:0;
-            width:100%;
-            height:100%;
-            z-index:1;
-        }
+    /* Toda la tarjeta clickable */
+    .prop-card a.full-link { position: absolute; top:0; left:0; width:100%; height:100%; z-index:1; }
 
-        /* Que los botones queden encima de todo */
-        .prop-card .btn {
-            position: relative;
-            z-index:2;
-        }
+    /* Que los botones queden encima de todo */
+    .prop-card .btn { position: relative; z-index:2; }
 
-        /* PRECIOS DESTACADAS Y ALQUILER - AMARILLO */
-        .destacadas .prop-card .precio,
-        .enalquiler .prop-card .precio {
-            color: #f5c505;  /* Amarillo */
-            font-weight: bold;
-            font-size: 1.2rem;
-            text-shadow: 0.5px 0.5px 0 #000, -0.5px 0.5px 0 #000, 0.5px -0.5px 0 #000, -0.5px -0.5px 0 #000;
-        }
+    /* Precios destacadas y alquiler - color_tema3 */
+    .destacadas .prop-card .precio,
+    .enalquiler .prop-card .precio {
+        color: <?= $color3 ?>;
+        font-weight: bold;
+        font-size: 1.2rem;
+        text-shadow: 0.5px 0.5px 0 #000, -0.5px 0.5px 0 #000, 0.5px -0.5px 0 #000, -0.5px -0.5px 0 #000;
+    }
 
-        /* PRECIOS EN VENTA - AZUL MARINO */
-        .enventa .prop-card .precio {
-            color: #02253e;  /* Azul marino */
-            font-weight: bold;
-            font-size: 1.2rem;
-            text-shadow: 0.5px 0.5px 0 #000;
-        }
+    /* Precios en venta - color_tema1 */
+    .enventa .prop-card .precio {
+        color: <?= $color3 ?>;
+        font-weight: bold;
+        font-size: 1.2rem;
+        text-shadow: 0.5px 0.5px 0 #000;
+    }
 
-        /* SECCIONES Y TARJETAS */
-        .destacadas { background-color: #02253e; color: white; padding: 30px 0; }
-        .destacadas .prop-card { background-color: #02253e; color: white; border: none; }
-        .destacadas .prop-card h5,
-        .destacadas .prop-card p,
-        .destacadas .prop-card i { color: white; }
+    /* SECCIONES Y TARJETAS */
+    .destacadas { background-color: <?= $color1 ?>; color: <?= $color2 ?>; padding: 30px 0; }
+    .destacadas .prop-card { background-color: <?= $color1 ?>; color: <?= $color2 ?>; border: none; }
+    .destacadas .prop-card h5,
+    .destacadas .prop-card p,
+    .destacadas .prop-card i { color: <?= $color2 ?>; }
 
-        .enalquiler { background-color: #02253e; color: white; padding: 30px 0; }
-        .enalquiler .prop-card { background-color: #02253e; color: white; border: none; }
-        .enalquiler .prop-card h5,
-        .enalquiler .prop-card p,
-        .enalquiler .prop-card i { color: white; }
+    .enalquiler { background-color: <?= $color1 ?>; color: <?= $color2 ?>; padding: 30px 0; }
+    .enalquiler .prop-card { background-color: <?= $color1 ?>; color: <?= $color2 ?>; border: none; }
+    .enalquiler .prop-card h5,
+    .enalquiler .prop-card p,
+    .enalquiler .prop-card i { color: <?= $color2 ?>; }
 
-        .enventa { background-color: #fff; color: #000; padding: 30px 0; }
-        .enventa .prop-card { background-color: #fff; color: #000; border: 1px solid #ddd; }
-        .enventa .prop-card h5,
-        .enventa .prop-card p,
-        .enventa .prop-card i { color: #000; }
+    .enventa { background-color: <?= $color2 ?>; color: <?= $color1 ?>; padding: 30px 0; }
+    .enventa .prop-card { background-color: <?= $color2 ?>; color: <?= $color1 ?>; border: 1px solid #ddd; }
+    .enventa .prop-card h5,
+    .enventa .prop-card p,
+    .enventa .prop-card i { color: <?= $color1 ?>; }
 
-        /* Quiénes somos */
-        .qs-content { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 30px; padding: 30px; }
-        .qs-content img { width: 350px; border-radius: 10px; }
+    /* Quiénes somos */
+    .qs-content { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 30px; padding: 30px; }
+    .qs-content img { width: 350px; border-radius: 10px; }
 
-        /* Footer amarillo */
-        .footer-yellow { background-color: #f5c505; color: #333; padding: 40px 0; }
-        .footer-yellow .footer-col { flex: 1; padding: 10px; }
-        .footer-yellow .social-icons i { font-size: 24px; margin: 0 5px; }
-        .contact-form { background-color: #f0f0f0; padding: 20px; border-radius: 10px; }
-        .contact-form input, .contact-form textarea { margin-bottom: 10px; }
-        .contact-form button { background-color: #02253e; color: #f5c505; border: none; width: 100%; padding: 10px; font-weight: bold; }
-    </style>
+    /* Footer amarillo */
+    .footer-yellow { background-color: <?= $color3 ?>; color: <?= $color1 ?>; padding: 30px 20px; }
+    .footer-yellow .footer-col { flex: 1; padding: 10px; }
+    .footer-yellow .social-icons i { font-size: 28px; margin: 0 5px; }
+    .contact-form { background-color: <?= $color2 ?>; padding: 15px; border-radius: 10px; max-width:300px; }
+    .contact-form input, .contact-form textarea { margin-bottom: 10px; }
+    .contact-form button { background-color: <?= $color1 ?>; color: <?= $color3 ?>; border: none; width: 100%; padding: 10px; font-weight: bold; }
+
+    /* BOTONES VER MÁS */
+.btn-vermas { 
+    border: 2px solid <?= $color3 ?>;
+    color: <?= $color2 ?>;
+    font-weight: bold; 
+    padding: 8px 30px;
+    text-decoration: none; 
+    display: inline-block; 
+    border-radius: 8px; 
+    background-color: transparent; 
+}
+
+/* Destacadas y Alquiler */
+.btn-vermas-da {
+    color: <?= $color2 ?>; /* texto color_tema2 */
+    
+}
+    .btn-vermas-da:hover {
+        background-color: <?= $color3 ?>;
+        color: <?= $color2 ?>;
+    }
+
+    /* Ventas */
+    .btn-vermas-venta {
+        color: <?= $color1 ?>;
+        border-color: <?= $color3 ?>;
+        background-color: transparent;
+    }
+    .btn-vermas-venta:hover {
+        background-color: <?= $color3 ?>;
+        color: <?= $color1 ?>;
+    }
+
+    .nav-links a {
+    color: <?= $color3 ?>; 
+    text-decoration: none; 
+    font-weight: 500;
+    margin: 0 8px; 
+}
+
+.nav-links a:not(:last-child)::after {
+    content: "|"; 
+    margin-left: 8px;
+    color: <?= $color3 ?>; 
+}
+</style>
+
 </head>
 <body>
 
-<div style="background-color:#02253e; padding:5px 30px; display:flex; justify-content:space-between; align-items:flex-start;">
+<div style="background-color:<?= $color1 ?>; padding:5px 30px; display:flex; justify-content:space-between; align-items:flex-start;">
     <!-- Izquierda: Logo principal -->
     <div>
         <img src="<?php echo $config['icono_principal']; ?>" alt="Logo" style="height:50px;">
@@ -123,7 +166,7 @@ $resPropiedades = $conect->query($sqlPropiedades);
     <!-- Derecha: Admin y nav-links -->
     <div style="text-align:right;">
         <a href="dashboard.php"><img src="uploads/administracion.jpg" alt="Admin" style="height:30px; cursor:pointer;"></a>
-        <div style="margin-top:5px;">
+        <div class="nav-links" style="margin-top:5px;">
             <a href="#inicio" class="text-warning me-2">Inicio</a>
             <a href="#quienes" class="text-warning me-2">Quiénes Somos</a>
             <a href="#alquileres" class="text-warning me-2">Alquileres</a>
@@ -192,9 +235,9 @@ $resPropiedades = $conect->query($sqlPropiedades);
                 </div>
             <?php } } ?>
         </div>
-        <div class="text-center mt-3">
-            <a href="destacadas.php" class="btn btn-outline-light">Ver más</a>
-        </div>
+     <div class="text-center mt-3">
+    <a href="destacadas.php" class="btn-vermas btn-vermas-da">Ver más...</a>
+</div>
     </div>
 </section>
 
@@ -219,7 +262,7 @@ $resPropiedades = $conect->query($sqlPropiedades);
             <?php } } ?>
         </div>
         <div class="text-center mt-3">
-            <a href="ventas.php" class="btn btn-outline-primary">Ver más</a>
+    <a href="ventas.php" class="btn-vermas btn-vermas-venta">Ver más...</a>
         </div>
     </div>
 </section>
@@ -245,46 +288,51 @@ $resPropiedades = $conect->query($sqlPropiedades);
             <?php } } ?>
         </div>
         <div class="text-center mt-3">
-            <a href="alquileres.php" class="btn btn-outline-light">Ver más</a>
-        </div>
+    <a href="alquileres.php" class="btn-vermas btn-vermas-da">Ver más...</a>
+</div>
+
     </div>
 </section>
 
 <!-- FOOTER AMARILLO -->
-<section class="footer-yellow" id="contacto">
-    <div class="container d-flex flex-wrap justify-content-between">
-        <div class="footer-col">
-            <h5>Contacto</h5>
+<section class="footer-yellow" id="contacto" style="padding: 20px 0;">
+    <div class="container d-flex flex-wrap justify-content-between align-items-start">
+        <!-- Contacto -->
+        <div class="footer-col" style="flex:1; min-width:200px;">
+         
             <p><strong>Dirección:</strong> <?php echo $config['direccion']; ?></p>
             <p><strong>Tel:</strong> <?php echo $config['telefono']; ?></p>
             <p><strong>Email:</strong> <?php echo $config['email']; ?></p>
         </div>
-        <div class="footer-col text-center">
-            <img src="<?php echo $config['icono_blanco']; ?>" alt="Logo" height="80">
-            <div class="social-icons mt-2">
-                <a href="<?php echo $config['facebook']; ?>" target="_blank"><i class="bi bi-facebook"></i></a>
-                <a href="<?php echo $config['instagram']; ?>" target="_blank"><i class="bi bi-instagram"></i></a>
+
+        <!-- Logo y redes sociales -->
+        <div class="footer-col text-center" style="flex:1; min-width:200px;">
+            <img src="<?php echo $config['icono_blanco']; ?>" alt="Logo" height="100">
+            <div class="social-icons mt-2" style="font-size:28px;">
+                <a href="<?php echo $config['facebook']; ?>" target="_blank"><i class="bi bi-facebook me-2"></i></a>
+                <a href="<?php echo $config['instagram']; ?>" target="_blank"><i class="bi bi-instagram me-2"></i></a>
                 <a href="<?php echo $config['twitter']; ?>" target="_blank"><i class="bi bi-twitter"></i></a>
             </div>
         </div>
-        <div class="footer-col">
-            <div class="contact-form">
+
+        <!-- Formulario de contacto -->
+        <div class="footer-col" style="flex:1; min-width:250px;">
+            <div class="contact-form" style="padding:15px; background-color:#f0f0f0; border-radius:8px;">
                 <h5>Contáctanos</h5>
                 <form>
-                    <input type="text" class="form-control" placeholder="Nombre">
-                    <input type="email" class="form-control" placeholder="Email">
-                    <input type="text" class="form-control" placeholder="Teléfono">
-                    <textarea class="form-control" rows="3" placeholder="Mensaje"></textarea>
-                    <button type="submit">Enviar</button>
+                    <input type="text" class="form-control mb-2" placeholder="Nombre" style="height:32px;">
+                    <input type="email" class="form-control mb-2" placeholder="Email" style="height:32px;">
+                    <input type="text" class="form-control mb-2" placeholder="Teléfono" style="height:32px;">
+                    <textarea class="form-control mb-2" rows="2" placeholder="Mensaje"></textarea>
+                    <button type="submit" style="height:35px; font-weight:bold;">Enviar</button>
                 </form>
             </div>
         </div>
     </div>
 </section>
 
-<div style="background-color:#02253e; color:white; text-align:center; padding:10px 0; font-size:14px;">
+<div style="background-color:<?= $color1 ?>; color:white; text-align:center; padding:8px 0; font-size:14px;">
     &copy; Derechos Reservados 2025
 </div>
-
 </body>
 </html>
