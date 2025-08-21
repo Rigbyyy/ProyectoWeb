@@ -260,7 +260,7 @@ $resPropiedades = $conect->query($sqlPropiedades);
             <p><strong>Email:</strong> <?php echo $config['email']; ?></p>
         </div>
         <div class="footer-col text-center">
-            <img src="<?php echo $config['icono_principal']; ?>" alt="Logo" height="80">
+            <img src="<?php echo $config['icono_blanco']; ?>" alt="Logo" height="80">
             <div class="social-icons mt-2">
                 <a href="<?php echo $config['facebook']; ?>" target="_blank"><i class="bi bi-facebook"></i></a>
                 <a href="<?php echo $config['instagram']; ?>" target="_blank"><i class="bi bi-instagram"></i></a>
