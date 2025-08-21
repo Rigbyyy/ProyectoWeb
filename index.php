@@ -56,155 +56,51 @@
     }
   </style>
 </head>
-<body>
+<body style="background-color: <?= $config['color_tema'] ?>;">
 
-  <!-- Navbar -->
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <div class="container">
-      <a class="navbar-brand" href="#">UTW Solutions</a>
-      <div class="collapse navbar-collapse">
-        <ul class="navbar-nav ms-auto">
-          <li class="nav-item"><a class="nav-link" href="#">Inicio</a></li>
-          <li class="nav-item"><a class="nav-link" href="#">Quienes Somos</a></li>
-          <li class="nav-item"><a class="nav-link" href="#">Alquileres</a></li>
-          <li class="nav-item"><a class="nav-link" href="#">Ventas</a></li>
-          <li class="nav-item"><a class="nav-link" href="#">Contáctenos</a></li>
-        </ul>
-      </div>
-    </div>
-  </nav>
+    <!-- Encabezado -->
+    <header>
+        <img src="<?= $config['icono_principal'] ?>" alt="Logo" height="60">
+        <h1><?= $config['banner_texto'] ?></h1>
+        <img src="<?= $config['banner_imagen'] ?>" alt="Banner" height="120">
+    </header>
 
-  <!-- Banner -->
-  <div class="banner">
-    <h1>PERMITENOS AYUDARTE A CUMPLIR TUS SUEÑOS</h1>
-  </div>
+    <!-- Menú -->
+    <nav>
+        <a href="index.php">Inicio</a>
+        <a href="quienes.php">Quiénes Somos</a>
+        <a href="contacto.php">Contacto</a>
+        <?php if(isset($_SESSION['usuario'])): ?>
+            <a href="logout.php">Cerrar Sesión (<?= $_SESSION['usuario'] ?>)</a>
+        <?php else: ?>
+            <a href="login.php">Login</a>
+        <?php endif; ?>
+    </nav>
 
-  <!-- Quienes Somos -->
-  <div class="container">
-    <h2 class="section-title">QUIENES SOMOS</h2>
-    <div class="row">
-      <div class="col-md-6">
-        <p>Somos una empresa comprometida con ayudarte a encontrar la propiedad de tus sueños. Nuestro equipo profesional está listo para asesorarte en todo el proceso de compra, venta o alquiler.</p>
-      </div>
-      <div class="col-md-6">
-        <img src="https://www.inmobiliariaredic.com/wp-content/uploads/2021/07/quienes-somos.jpg" class="img-fluid" alt="Quienes Somos">
-      </div>
-    </div>
-  </div>
+    <!-- Propiedades destacadas -->
+    <section>
+        <h2>Propiedades Destacadas</h2>
+        <div class="propiedades">
+            <?php while($fila = $propiedades->fetch_assoc()): ?>
+                <div class="propiedad">
+                    <img src="<?= $fila['imagen_destacada'] ?>" alt="<?= $fila['titulo'] ?>" width="250">
+                    <h3><?= $fila['titulo'] ?></h3>
+                    <p><?= $fila['descripcion_breve'] ?></p>
+                    <p><strong>Precio:</strong> $<?= number_format($fila['precio'], 2) ?></p>
+                    <p><strong>Agente:</strong> <?= $fila['agente'] ?></p>
+                    <a href="detalle.php?id=<?= $fila['id'] ?>">Ver Detalles</a>
+                </div>
+            <?php endwhile; ?>
+        </div>
+    </section>
 
-  <!-- Propiedades Destacadas -->
-  <div class="destacadas">
-  <div class="container">
-    <h2 class="section-title text-white">PROPIEDADES DESTACADAS</h2>
-    <div class="row">
-      <div class="col-md-4">
-        <div class="property-card">
-          <img src="https://images.homify.com/v1458742164/p/photo/image/1418653/biedronka_r01.jpg" class="img-fluid mb-2" alt="Casa Mora">
-          <h5>Casa Mora</h5>
-          <p>Ubicada al pie del volcán Arenal, 1000 m² de terreno, vista espectacular.</p>
-          <p><strong>Precio:</strong> $65,000</p>
-        </div>
-      </div>
-      <div class="col-md-4">
-        <div class="property-card">
-          <img src="https://images.homify.com/v1458742164/p/photo/image/1418653/biedronka_r01.jpg" class="img-fluid mb-2" alt="Casa Mora">
-          <h5>Casa Mora</h5>
-          <p>Ubicada al pie del volcán Arenal, 1000 m² de terreno, vista espectacular.</p>
-          <p><strong>Precio:</strong> $65,000</p>
-        </div>
-      </div>
-      <div class="col-md-4">
-        <div class="property-card">
-          <img src="https://images.homify.com/v1458742164/p/photo/image/1418653/biedronka_r01.jpg" class="img-fluid mb-2" alt="Casa Mora">
-          <h5>Casa Mora</h5>
-          <p>Ubicada al pie del volcán Arenal, 1000 m² de terreno, vista espectacular.</p>
-          <p><strong>Precio:</strong> $65,000</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div class="venta">
-  <div class="container">
-    <h2 class="section-title">PROPIEDADES EN VENTA</h2>
-    <div class="row">
-      <div class="col-md-4">
-        <div class="property-card">
-          <img src="https://images.homify.com/v1458742164/p/photo/image/1418653/biedronka_r01.jpg" class="img-fluid mb-2" alt="Casa Mora">
-          <h5>Casa Mora</h5>
-          <p>Ubicada al pie del volcán Arenal, 1000 m² de terreno, vista espectacular.</p>
-          <p><strong>Precio:</strong> $65,000</p>
-        </div>
-      </div>
-      <div class="col-md-4">
-        <div class="property-card">
-          <img src="https://images.homify.com/v1458742164/p/photo/image/1418653/biedronka_r01.jpg" class="img-fluid mb-2" alt="Casa Mora">
-          <h5>Casa Mora</h5>
-          <p>Ubicada al pie del volcán Arenal, 1000 m² de terreno, vista espectacular.</p>
-          <p><strong>Precio:</strong> $65,000</p>
-        </div>
-      </div>
-      <div class="col-md-4">
-        <div class="property-card">
-          <img src="https://images.homify.com/v1458742164/p/photo/image/1418653/biedronka_r01.jpg" class="img-fluid mb-2" alt="Casa Mora">
-          <h5>Casa Mora</h5>
-          <p>Ubicada al pie del volcán Arenal, 1000 m² de terreno, vista espectacular.</p>
-          <p><strong>Precio:</strong> $65,000</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div class="alquiler">
-  <div class="container">
-    <h2 class="section-title text-white">PROPIEDADES EN ALQUILER</h2>
-    <div class="row">
-      <div class="col-md-4">
-        <div class="property-card">
-          <img src="https://images.homify.com/v1458742164/p/photo/image/1418653/biedronka_r01.jpg" class="img-fluid mb-2" alt="Casa Mora">
-          <h5>Casa Mora</h5>
-          <p>Ubicada al pie del volcán Arenal, 1000 m² de terreno, vista espectacular.</p>
-          <p><strong>Alquiler:</strong> $800/mes</p>
-        </div>
-      </div>
-      <div class="col-md-4">
-        <div class="property-card">
-          <img src="https://images.homify.com/v1458742164/p/photo/image/1418653/biedronka_r01.jpg" class="img-fluid mb-2" alt="Casa Mora">
-          <h5>Casa Mora</h5>
-          <p>Ubicada al pie del volcán Arenal, 1000 m² de terreno, vista espectacular.</p>
-          <p><strong>Alquiler:</strong> $800/mes</p>
-        </div>
-      </div>
-      <div class="col-md-4">
-        <div class="property-card">
-          <img src="https://images.homify.com/v1458742164/p/photo/image/1418653/biedronka_r01.jpg" class="img-fluid mb-2" alt="Casa Mora">
-          <h5>Casa Mora</h5>
-          <p>Ubicada al pie del volcán Arenal, 1000 m² de terreno, vista espectacular.</p>
-          <p><strong>Alquiler:</strong> $800/mes</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-
-
-  <!-- Footer -->
-  <div class="footer">
-    <div class="container text-center">
-      <p><strong>Dirección:</strong> Cañas Guanacaste</p>
-      <p><strong>Teléfono:</strong> 8890-2030</p>
-      <p><strong>Email:</strong> info@utwrealestate.com</p>
-      <div class="social-icons">
-        <i class="bi bi-facebook"></i>
-        <i class="bi bi-youtube"></i>
-        <i class="bi bi-instagram"></i>
-      </div>
-      <p class="mt-3">Derechos Reservados 2024</p>
-    </div>
-  </div>
+    <!-- Footer -->
+    <footer>
+        <p><?= $config['direccion'] ?> | Tel: <?= $config['telefono'] ?> | Email: <?= $config['email'] ?></p>
+        <a href="<?= $config['facebook'] ?>">Facebook</a> |
+        <a href="<?= $config['instagram'] ?>">Instagram</a> |
+        <a href="<?= $config['twitter'] ?>">Twitter</a>
+    </footer>
 
 </body>
 </html>
