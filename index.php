@@ -21,7 +21,8 @@ $resPropiedades = $conect->query($sqlPropiedades);
     <?php
         $color1 = $config['color_tema1']; 
         $color2 = $config['color_tema2']; 
-        $color3 = $config['color_tema3']; 
+        $color3 = $config['color_tema3'];
+        $color4 = $config['color_tema4']; 
     ?>
 
     body { 
@@ -167,11 +168,11 @@ $resPropiedades = $conect->query($sqlPropiedades);
     <div style="text-align:right;">
         <a href="dashboard.php"><img src="uploads/administracion.jpg" alt="Admin" style="height:30px; cursor:pointer;"></a>
         <div class="nav-links" style="margin-top:5px;">
-            <a href="#inicio" class="text-warning me-2">Inicio</a>
-            <a href="#quienes" class="text-warning me-2">Quiénes Somos</a>
-            <a href="#alquileres" class="text-warning me-2">Alquileres</a>
-            <a href="#ventas" class="text-warning me-2">Ventas</a>
-            <a href="#contacto" class="text-warning">Contáctenos</a>
+            <a href="#inicio" >Inicio</a>
+            <a href="#quienes" >Quiénes Somos</a>
+            <a href="#alquileres" >Alquileres</a>
+            <a href="#ventas" >Ventas</a>
+            <a href="#contacto" >Contáctenos</a>
         </div>
     </div>
 </div>
@@ -316,23 +317,25 @@ $resPropiedades = $conect->query($sqlPropiedades);
         </div>
 
         <!-- Formulario de contacto -->
-        <div class="footer-col" style="flex:1; min-width:250px;">
-            <div class="contact-form" style="padding:15px; background-color:#f0f0f0; border-radius:8px;">
-                <h5>Contáctanos</h5>
-                <form>
-                    <input type="text" class="form-control mb-2" placeholder="Nombre" style="height:32px;">
-                    <input type="email" class="form-control mb-2" placeholder="Email" style="height:32px;">
-                    <input type="text" class="form-control mb-2" placeholder="Teléfono" style="height:32px;">
-                    <textarea class="form-control mb-2" rows="2" placeholder="Mensaje"></textarea>
-                    <button type="submit" style="height:35px; font-weight:bold;">Enviar</button>
-                </form>
-            </div>
-        </div>
+      <div class="footer-col" style="flex:1; min-width:250px;">
+    <div class="contact-form" style="padding:15px; background-color:<?= $color4 ?>; border-radius:8px;">
+        <h5>Contáctanos</h5>
+        <form method="POST" action="contacto.php">
+            <input type="text" class="form-control mb-2" name="nombre" placeholder="Nombre" style="height:32px;">
+            <input type="email" class="form-control mb-2" name="email" placeholder="Email" style="height:32px;">
+            <input type="text" class="form-control mb-2" name="telefono" placeholder="Teléfono" style="height:32px;">
+            <textarea class="form-control mb-2" rows="2" name="mensaje" placeholder="Mensaje"></textarea>
+            <button type="submit" style="height:35px; font-weight:bold;">Enviar</button>
+        </form>
+    </div>
+</div>
+
     </div>
 </section>
 
 <div style="background-color:<?= $color1 ?>; color:white; text-align:center; padding:8px 0; font-size:14px;">
     &copy; Derechos Reservados 2025
 </div>
+
 </body>
 </html>
