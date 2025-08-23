@@ -1,6 +1,7 @@
 <?php
 include("conexion.php");
 $id = $_GET['id'] ?? 0;
+$from = isset($_GET['from']) ? $_GET['from'] : 'index';
 
 $stmt = $conect->prepare("SELECT p.*, u.nombre AS agente 
     FROM propiedades p 
@@ -148,7 +149,7 @@ $color4 = $config['color_tema4'];
         <div class="mapa">
             <?= $propiedad['mapa'] ?>
         </div>
-        <a href="index.php" class="btn-volver">← Volver</a>
+       <a href="<?= $from ?>.php" class="btn-volver">Volver</a>
     </div>
 </body>
 </html>

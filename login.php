@@ -1,21 +1,6 @@
 <?php
 session_start();
-session_unset();
-session_destroy();
-session_start();
-
 include("conexion.php");
-
-// Si ya hay sesión iniciada, redirigir según privilegio
-if(isset($_SESSION['usuario'])){
-    if($_SESSION['privilegio'] == 'admin'){
-        header("Location: dashboard.php");
-        exit();
-    } else {
-        header("Location: propiedades.php");
-        exit();
-    }
-}
 
 $error = '';
 
@@ -23,7 +8,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $usuario = trim($_POST['usuario']);
     $pass = trim($_POST['contraseña']);
 
-    // Validación simple
     if(empty($usuario) || empty($pass)){
         $error = "Por favor, complete todos los campos.";
     } else {
@@ -39,7 +23,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $_SESSION['privilegio'] = $user['privilegio'];
             $_SESSION['id'] = $user['id'];
 
-            // Redirigir según privilegio
             if($user['privilegio'] == 'admin'){
                 header("Location: dashboard.php");
             } else {
@@ -60,15 +43,104 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <title>Login - Inmobiliaria</title>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 <style>
-    body { background-color: #f8f9fa; display:flex; justify-content:center; align-items:center; height:100vh; font-family: 'Segoe UI', sans-serif; }
-    .login-box { background:white; padding:30px; border-radius:10px; box-shadow:0 0 10px rgba(0,0,0,0.2); width:350px; }
+    body {
+        background-color: #f0f2f5;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+    }
+
+    .login-container {
+        background: #02253e;
+        padding: 40px 30px;
+        border-radius: 15px;
+        box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+        width: 380px;
+        color: #fff;
+    }
+
+    .login-container h3 {
+        text-align: center;
+        margin-bottom: 25px;
+        color: #f5c505;
+        font-weight: bold;
+    }
+
+    .login-container label {
+        font-weight: bold;
+    }
+
+    .login-container input {
+        border-radius: 8px;
+        border: none;
+        padding: 10px;
+        margin-bottom: 15px;
+    }
+
+    .login-container input:focus {
+        outline: 2px solid #f5c505;
+        box-shadow: 0 0 6px #f5c505;
+    }
+
+    .btn-login {
+        background-color: #f5c505;
+        color: #02253e;
+        font-weight: bold;
+        border-radius: 8px;
+        width: 100%;
+        padding: 10px;
+        transition: all 0.3s;
+    }
+    .btn-login:hover {
+        background-color: #e0b500;
+        color: #02253e;
+    }
+
+    .error-msg {
+        background-color: #dc3545;
+        color: #fff;
+        padding: 10px;
+        border-radius: 8px;
+        margin-bottom: 15px;
+        text-align: center;
+    }
+
+    .nav-links {
+        position: absolute;
+        top: 20px;
+        left: 20px;
+    }
+
+    .nav-links a {
+        text-decoration: none;
+        padding: 8px 16px;
+        border-radius: 6px;
+        font-weight: bold;
+        margin-left: 10px;
+        transition: all 0.3s;
+        color: #fff;
+        background-color: #02253e;
+    }
+
+    .nav-links a:hover {
+        background-color: #f5c505;
+        color: #02253e;
+    }
 </style>
 </head>
 <body>
-<div class="login-box">
-    <h3 class="text-center mb-4">Iniciar Sesión</h3>
+
+<div class="nav-links">
+    <a href="index.php">Volver al inicio</a>
+</div>
+
+<div class="login-container">
+    <h3>Iniciar Sesión</h3>
     <?php if($error): ?>
-        <div class="alert alert-danger"><?= $error ?></div>
+        <div class="error-msg"><?= $error ?></div>
     <?php endif; ?>
     <form method="POST">
         <div class="mb-3">
@@ -79,8 +151,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <label>Contraseña</label>
             <input type="password" name="contraseña" class="form-control" required>
         </div>
-        <button type="submit" class="btn btn-primary w-100">Ingresar</button>
+        <button type="submit" class="btn-login">Ingresar</button>
     </form>
 </div>
+
 </body>
 </html>

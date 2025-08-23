@@ -166,7 +166,7 @@ $resPropiedades = $conect->query($sqlPropiedades);
     </div>
     <!-- Derecha: Admin y nav-links -->
     <div style="text-align:right;">
-        <a href="dashboard.php"><img src="uploads/administracion.jpg" alt="Admin" style="height:30px; cursor:pointer;"></a>
+        <a href="dashboard.php" class="bi bi-person-check fs-3"></a>
         <div class="nav-links" style="margin-top:5px;">
             <a href="#inicio" >Inicio</a>
             <a href="#quienes" >Quiénes Somos</a>
@@ -227,7 +227,7 @@ $resPropiedades = $conect->query($sqlPropiedades);
                 if($prop['destacada'] == 1) { ?>
                 <div class="col-md-4">
                     <div class="prop-card position-relative">
-                        <a href="detalle.php?id=<?php echo $prop['id']; ?>" class="full-link"></a>
+                        <a href="detalle.php?id=<?php echo $prop['id']; ?>&from=index" class="full-link"></a>
                         <img src="<?php echo $prop['imagen_destacada']; ?>" alt="Imagen Propiedad">
                         <h5 class="mt-2"><?php echo $prop['titulo']; ?></h5>
                         <p><?php echo $prop['descripcion_breve']; ?></p>
@@ -253,7 +253,7 @@ $resPropiedades = $conect->query($sqlPropiedades);
                 if($prop['tipo'] == 'venta') { ?>
                 <div class="col-md-4">
                     <div class="prop-card position-relative">
-                        <a href="detalle.php?id=<?php echo $prop['id']; ?>" class="full-link"></a>
+                        <a href="detalle.php?id=<?php echo $prop['id']; ?>&from=index" class="full-link"></a>
                         <img src="<?php echo $prop['imagen_destacada']; ?>" alt="Imagen Propiedad">
                         <h5 class="mt-2"><?php echo $prop['titulo']; ?></h5>
                         <p><?php echo $prop['descripcion_breve']; ?></p>
@@ -279,7 +279,7 @@ $resPropiedades = $conect->query($sqlPropiedades);
                 if($prop['tipo'] == 'alquiler') { ?>
                 <div class="col-md-4">
                     <div class="prop-card position-relative">
-                        <a href="detalle.php?id=<?php echo $prop['id']; ?>" class="full-link"></a>
+                        <a href="detalle.php?id=<?php echo $prop['id']; ?>&from=index" class="full-link"></a>
                         <img src="<?php echo $prop['imagen_destacada']; ?>" alt="Imagen Propiedad">
                         <h5 class="mt-2"><?php echo $prop['titulo']; ?></h5>
                         <p><?php echo $prop['descripcion_breve']; ?></p>
@@ -310,9 +310,9 @@ $resPropiedades = $conect->query($sqlPropiedades);
         <div class="footer-col text-center" style="flex:1; min-width:200px;">
             <img src="<?php echo $config['icono_blanco']; ?>" alt="Logo" height="100">
             <div class="social-icons mt-2" style="font-size:28px;">
-                <a href="<?php echo $config['facebook']; ?>" target="_blank"><i class="bi bi-facebook me-2"></i></a>
-                <a href="<?php echo $config['instagram']; ?>" target="_blank"><i class="bi bi-instagram me-2"></i></a>
-                <a href="<?php echo $config['twitter']; ?>" target="_blank"><i class="bi bi-twitter"></i></a>
+                <a href="<?php echo $config['facebook']; ?>" target="_blank"><i class="bi bi-facebook text-dark me-2"></i></a>
+                <a href="<?php echo $config['instagram']; ?>" target="_blank"><i class="bi bi-instagram text-dark me-2"></i></a>
+                <a href="<?php echo $config['twitter']; ?>" target="_blank"><i class="bi bi-twitter text-dark"></i></a>
             </div>
         </div>
 
