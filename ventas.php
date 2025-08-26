@@ -2,14 +2,14 @@
 session_start();
 require_once "conexion.php";
 
-// Configuración y propiedades
+
 $sqlConfig = "SELECT * FROM configuracion LIMIT 1";
 $resConfig = $conect->query($sqlConfig);
 $config = $resConfig->fetch_assoc();
 
-$color1 = $config['color_tema1']; // Azul marino
-$color2 = $config['color_tema2']; // Blanco
-$color3 = $config['color_tema3']; // Amarillo
+$color1 = $config['color_tema1']; 
+$color2 = $config['color_tema2']; 
+$color3 = $config['color_tema3']; 
 
 $sqlPropiedades = "SELECT * FROM propiedades WHERE tipo = 'venta' ORDER BY id DESC";
 $resPropiedades = $conect->query($sqlPropiedades);

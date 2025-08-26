@@ -7,24 +7,24 @@ include("conexion.php");
 
 function normalizarHex($color) {
     if (preg_match('/^#([a-fA-F0-9]{3})$/', $color)) {
-        // para pasar hexadecimales abreviados a su numero comleto ejemplo #fff → #ffffff
+       
         $color = '#' . $color[1] . $color[1] . $color[2] . $color[2] . $color[3] . $color[3];
     }
     return $color;
 }
 
 
-// --- Cargar configuración actual ---
+
 $result = $conect->query("SELECT * FROM configuracion LIMIT 1");
 $config = $result->fetch_assoc();
 
 
 
-// Valores por defecto
-$color_tema1 = normalizarHex($config['color_tema1'] ?? '#02253e'); // oscuro
-$color_tema2 = normalizarHex($config['color_tema2'] ?? '#ffffff'); // claro
-$color_tema3 = normalizarHex($config['color_tema3'] ?? '#f5c505'); // acento
-$color_tema4 = normalizarHex($config['color_tema4'] ?? '#e3d1d1'); // secundario
+
+$color_tema1 = normalizarHex($config['color_tema1'] ?? '#02253e');
+$color_tema2 = normalizarHex($config['color_tema2'] ?? '#ffffff'); 
+$color_tema3 = normalizarHex($config['color_tema3'] ?? '#f5c505');
+$color_tema4 = normalizarHex($config['color_tema4'] ?? '#e3d1d1'); 
 
 $icono_principal = $config['icono_principal'] ?? '';
 $icono_blanco    = $config['icono_blanco'] ?? '';
@@ -39,7 +39,7 @@ $direccion       = $config['direccion'] ?? '';
 $telefono        = $config['telefono'] ?? '';
 $email           = $config['email'] ?? '';
 
-// --- Guardar cambios ---
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     function subirArchivo($campo, $directorio = "uploads/") {
@@ -53,7 +53,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         return null;
     }
     
-    // Colores
+  
     $color_tema1 =normalizarHex( $_POST['color_tema1'] ?? $color_tema1);
     $color_tema2 = normalizarHex($_POST['color_tema2'] ?? $color_tema2);
     $color_tema3 = normalizarHex($_POST['color_tema3'] ?? $color_tema3);

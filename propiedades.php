@@ -2,7 +2,7 @@
 session_start();
 include("conexion.php");
 
-// Verificar sesión
+
 if(!isset($_SESSION['usuario'])){
     header("Location: login.php");
     exit();
@@ -12,7 +12,7 @@ $usuario_id = $_SESSION['id'];
 $privilegio = $_SESSION['privilegio'];
 $msg = "";
 
-// Agregar nueva propiedad
+
 if(isset($_POST['agregar'])){
     $tipo = $_POST['tipo'];
     $destacada = isset($_POST['destacada']) ? 1 : 0;
@@ -23,15 +23,15 @@ if(isset($_POST['agregar'])){
     $mapa = $_POST['mapa'];
     $ubicacion = $_POST['ubicacion'];
 
-    $imagen_destacada = ""; // Inicializamos como string vacío
+    $imagen_destacada = ""; 
 
-    // Validamos que se haya seleccionado una imagen
+    
     if(!empty($_FILES['imagen_destacada']['name'])){
         $nombre = time() . "_" . basename($_FILES['imagen_destacada']['name']);
         $directorio = "uploads/";
 
         if(move_uploaded_file($_FILES['imagen_destacada']['tmp_name'], $directorio.$nombre)){
-            $imagen_destacada = $directorio.$nombre; // Guardamos la ruta
+            $imagen_destacada = $directorio.$nombre; 
         } else {
             $msg = "Error al subir la imagen. Intenta nuevamente.";
         }
@@ -39,7 +39,7 @@ if(isset($_POST['agregar'])){
         $msg = "Debe subir una imagen de la propiedad.";
     }
 
-    // Solo insertamos si hay una imagen subida correctamente
+    
     if(!empty($imagen_destacada)){
         $sql = "INSERT INTO propiedades 
                 (tipo, destacada, titulo, descripcion_breve, precio, agente_id, imagen_destacada, descripcion_larga, mapa, ubicacion)
@@ -56,11 +56,11 @@ if(isset($_POST['agregar'])){
 }
 
 
-// Eliminar propiedad
+
 if(isset($_GET['eliminar'])){
     $id = $_GET['eliminar'];
 
-      // Primero obtenemos la ruta de la imagen para poder eliminar la imagen de uploads tambien
+      
     if($privilegio == 'admin'){
         $resultado = $conect->query("SELECT imagen_destacada FROM propiedades WHERE id=$id");
     } else {
@@ -75,7 +75,7 @@ if(isset($_GET['eliminar'])){
         }
     }
 
-    // Ahora eliminamos la propiedad de la base de datos
+   
     if($privilegio == 'admin'){
         $conect->query("DELETE FROM propiedades WHERE id=$id");
     } else {
@@ -84,7 +84,7 @@ if(isset($_GET['eliminar'])){
     $msg = "Propiedad eliminada correctamente.";
 }
 
-// Obtener propiedades
+
 if($privilegio == 'admin'){
     $propiedades = $conect->query("SELECT p.*, u.usuario as agente FROM propiedades p JOIN usuarios u ON p.agente_id=u.id");
 } else {
@@ -133,14 +133,14 @@ body { background-color: #f0f2f5; font-family: 'Segoe UI', Tahoma, Geneva, Verda
     margin-left: 10px;
     transition: all 0.3s;
     color: #fff;
-    background-color: #02253e; /* azul oscuro */
+    background-color: #02253e; 
 }
 .nav-links a:hover {
-    background-color: #f5c505; /* amarillo al pasar el mouse */
+    background-color: #f5c505; 
     color: #02253e;
 }
 .logout-link {
-    background-color: #dc3545; /* rojo */
+    background-color: #dc3545; 
 }
 .logout-link:hover {
     background-color: #b52d3a;
@@ -166,7 +166,7 @@ body { background-color: #f0f2f5; font-family: 'Segoe UI', Tahoma, Geneva, Verda
 <div class="alert alert-info"><?= $msg ?></div>
 <?php endif; ?>
 
-<!-- Formulario -->
+
 <div class="form-card">
 <form method="POST" enctype="multipart/form-data" class="row g-3">
     <div class="col-md-3">
@@ -216,7 +216,7 @@ body { background-color: #f0f2f5; font-family: 'Segoe UI', Tahoma, Geneva, Verda
 </form>
 </div>
 
-<!-- Cards visualización -->
+
 <section class="destacadas">
     <div class="container">
         <h2 class="section-title">Mis Propiedades</h2>
@@ -247,7 +247,7 @@ body { background-color: #f0f2f5; font-family: 'Segoe UI', Tahoma, Geneva, Verda
 </section>
 
 <script>
-// Preview de imagen
+
 function previewImage(event){
     var reader = new FileReader();
     reader.onload = function(){
@@ -258,7 +258,7 @@ function previewImage(event){
     reader.readAsDataURL(event.target.files[0]);
 }
 
-// Mapa Leaflet
+
 var map = L.map('map').setView([9.9780, -84.6660], 13);
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { attribution: '© OpenStreetMap' }).addTo(map);
 var marker = L.marker([9.9780, -84.6660], {draggable:true}).addTo(map);

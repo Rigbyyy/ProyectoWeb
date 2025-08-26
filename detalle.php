@@ -87,7 +87,6 @@ $color4 = $config['color_tema4'];
             color: <?= $color2 ?>;
         }
 
-        /* Precio destacado */
         .precio {
             display: inline-block;
             margin: 20px 0;

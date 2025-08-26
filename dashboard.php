@@ -28,7 +28,6 @@ h2 {
     text-align: center;
 }
 
-/* Botones de navegación */
 .nav-btn {
     display: block;
     width: 200px;
@@ -38,13 +37,13 @@ h2 {
     font-weight: bold;
     text-decoration: none;
     color: #fff;
-    background-color: #02253e; /* azul oscuro */
+    background-color: #02253e; 
     border-radius: 12px;
     transition: all 0.3s;
 }
 
 .nav-btn:hover {
-    background-color: #f5c505; /* amarillo */
+    background-color: #f5c505; 
     color: #02253e;
     transform: scale(1.05);
 }

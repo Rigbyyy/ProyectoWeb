@@ -2,7 +2,6 @@
 session_start();
 include("conexion.php");
 
-// Verificar sesión
 if (!isset($_SESSION['usuario'])) {
     header("Location: login.php");
     exit();
@@ -12,7 +11,6 @@ $usuario_id = $_SESSION['id'];
 $privilegio = $_SESSION['privilegio'];
 $msg = "";
 
-// Obtener id del usuario a editar
 if (!isset($_GET['id'])) {
     header("Location: usuarios.php");
     exit();
@@ -20,13 +18,11 @@ if (!isset($_GET['id'])) {
 
 $id = $_GET['id'];
 
-// Validar permisos: admin puede editar cualquiera, agente solo a sí mismo
 if ($privilegio != 'admin' && $id != $usuario_id) {
     header("Location: usuarios.php");
     exit();
 }
 
-// Obtener datos del usuario
 $result = $conect->query("SELECT * FROM usuarios WHERE id=$id");
 if ($result->num_rows == 0) {
     header("Location: usuarios.php");
@@ -34,7 +30,6 @@ if ($result->num_rows == 0) {
 }
 $usuario = $result->fetch_assoc();
 
-// Procesar actualización
 if (isset($_POST['actualizar'])) {
     $nombre = $_POST['nombre'];
     $telefono = $_POST['telefono'];
@@ -67,7 +62,7 @@ if (isset($_POST['actualizar'])) {
 
         if ($stmt->execute()) {
             $msg = "Usuario actualizado correctamente.";
-            $usuario = $stmt->close() ? $usuario : $usuario; // refrescar datos
+            $usuario = $stmt->close() ? $usuario : $usuario;
         } else {
             $msg = "Error al actualizar: " . $stmt->error;
         }
@@ -101,14 +96,14 @@ h2 { text-align: center; margin-bottom: 30px; color: #150d3e; }
     margin-left: 10px;
     transition: all 0.3s;
     color: #fff;
-    background-color: #02253e; /* azul oscuro */
+    background-color: #02253e; 
 }
 .nav-links a:hover {
-    background-color: #f5c505; /* amarillo al pasar el mouse */
+    background-color: #f5c505; 
     color: #02253e;
 }
 .logout-link {
-    background-color: #dc3545; /* rojo */
+    background-color: #dc3545; 
 }
 .logout-link:hover {
     background-color: #b52d3a;

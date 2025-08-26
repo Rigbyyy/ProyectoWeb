@@ -2,13 +2,12 @@
 session_start();
 include("conexion.php");
 
-// Verificar sesión
+
 if(!isset($_SESSION['usuario'])){
     header("Location: login.php");
     exit();
 }
 
-// Obtener id de propiedad
 if(!isset($_GET['id'])){
     header("Location: propiedades.php");
     exit();
@@ -17,7 +16,6 @@ $propiedad_id = $_GET['id'];
 $usuario_id = $_SESSION['id'];
 $privilegio = $_SESSION['privilegio'];
 
-// Obtener propiedad
 if($privilegio == 'admin'){
     $sql = "SELECT * FROM propiedades WHERE id=?";
 } else {
@@ -37,10 +35,8 @@ if(!$propiedad){
     die("Propiedad no encontrada o no tienes permisos.");
 }
 
-// Mensaje
 $msg = "";
 
-// Guardar cambios
 if($_SERVER['REQUEST_METHOD'] == 'POST'){
     $tipo = $_POST['tipo'];
     $destacada = isset($_POST['destacada']) ? 1 : 0;
@@ -51,7 +47,6 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
     $mapa = $_POST['mapa'];
     $ubicacion = $_POST['ubicacion'];
 
-    // Subir nueva imagen si hay
     $imagen_destacada = $propiedad['imagen_destacada'];
     if(!empty($_FILES['imagen_destacada']['name'])){
         $nombre = time() . "_" . basename($_FILES['imagen_destacada']['name']);
@@ -60,7 +55,6 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
         $imagen_destacada = $directorio.$nombre;
     }
 
-    // Actualizar propiedad
     $sql = "UPDATE propiedades SET tipo=?, destacada=?, titulo=?, descripcion_breve=?, precio=?, imagen_destacada=?, descripcion_larga=?, mapa=?, ubicacion=? WHERE id=?";
     $stmt = $conect->prepare($sql);
     $stmt->bind_param("sissdssssi", $tipo, $destacada, $titulo, $descripcion_breve, $precio, $imagen_destacada, $descripcion_larga, $mapa, $ubicacion, $propiedad_id);
@@ -68,7 +62,6 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 
     $msg = "Propiedad actualizada correctamente.";
 
-    // Redirigir automáticamente a propiedades.php
     header("Location: propiedades.php");
     exit();
 

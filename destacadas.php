@@ -24,23 +24,19 @@ $resPropiedades = $conect->query($sqlPropiedades);
     <style>
         body { font-family: 'Segoe UI', sans-serif; margin:0; padding:0; background-color: <?= $color2 ?>; }
 
-        /* HEADER */
         .header { background-color: <?= $color1 ?>; padding: 15px 30px; display:flex; justify-content:space-between; align-items:center; }
         .header img { height:50px; }
         .nav-links a { color: <?= $color2 ?>; text-decoration:none; margin-left:15px; font-weight:500; }
         .nav-links a:hover { text-decoration:underline; }
 
-        /* Título de sección */
         .section-title { text-align:center; font-size:32px; margin:30px 0; color: <?= $color1 ?>; text-shadow:1px 1px 2px rgba(0,0,0,0.3); }
 
-        /* Propiedades */
         .prop-card { border-radius:10px; padding:15px; margin-bottom:30px; transition: transform 0.2s; position:relative; cursor:pointer; background-color:<?= $color2 ?>; box-shadow:0 4px 12px rgba(0,0,0,0.1); }
         .prop-card:hover { transform:scale(1.03); box-shadow:0 6px 18px rgba(0,0,0,0.2); }
         .prop-card img { width:100%; height:250px; object-fit:cover; border-radius:8px; }
         .prop-card h5, .prop-card p { text-align:center; margin-top:10px; }
         .prop-card .precio { text-align:center; font-size:1.3rem; font-weight:bold; color: <?= $color3 ?>; text-shadow: 0.5px 0.5px 0 #000; }
 
-        /* Botón Ver Más */
         .btn-vermas {
             border:2px solid <?= $color3 ?>;
             border-radius:12px;
@@ -57,7 +53,6 @@ $resPropiedades = $conect->query($sqlPropiedades);
             color: <?= $color2 ?>;
         }
 
-        /* Contenedor general */
         .container-prop { max-width:1200px; margin:0 auto; padding:30px; }
         .text-center { text-align:center; }
     

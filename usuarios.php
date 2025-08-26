@@ -2,7 +2,6 @@
 session_start();
 include("conexion.php");
 
-// Verificar sesión
 if (!isset($_SESSION['usuario'])) {
     header("Location: login.php");
     exit();
@@ -12,16 +11,16 @@ $usuario_id = $_SESSION['id'];
 $privilegio = $_SESSION['privilegio'];
 $msg = "";
 
-// Agregar nuevo usuario (solo admin)
+
 if (isset($_POST['agregar']) && $privilegio == 'admin') {
     $nombre = $_POST['nombre'];
     $telefono = $_POST['telefono'];
     $correo = $_POST['correo'];
     $usuario = $_POST['usuario'];
-    $contraseña = md5($_POST['contraseña']); // hash simple
+    $contraseña = md5($_POST['contraseña']); 
     $priv = $_POST['privilegio'];
 
-    // Verificar si el usuario ya existe
+    
     $check = $conect->query("SELECT id FROM usuarios WHERE usuario='$usuario'");
     if ($check->num_rows > 0) {
         $msg = "El nombre de usuario ya existe, elige otro.";
@@ -37,14 +36,14 @@ if (isset($_POST['agregar']) && $privilegio == 'admin') {
     }
 }
 
-// Eliminar usuario (solo admin)
+
 if (isset($_GET['eliminar']) && $privilegio == 'admin') {
     $id = $_GET['eliminar'];
     $conect->query("DELETE FROM usuarios WHERE id=$id");
     $msg = "Usuario eliminado correctamente.";
 }
 
-// Obtener usuarios
+
 if ($privilegio == 'admin') {
     $usuarios = $conect->query("SELECT * FROM usuarios");
 } else {
@@ -85,14 +84,14 @@ h2 { text-align: center; margin-bottom: 30px; color: #150d3e; }
     margin-left: 10px;
     transition: all 0.3s;
     color: #fff;
-    background-color: #02253e; /* azul oscuro */
+    background-color: #02253e; 
 }
 .nav-links a:hover {
-    background-color: #f5c505; /* amarillo al pasar el mouse */
+    background-color: #f5c505; 
     color: #02253e;
 }
 .logout-link {
-    background-color: #dc3545; /* rojo */
+    background-color: #dc3545; 
 }
 .logout-link:hover {
     background-color: #b52d3a;
@@ -118,7 +117,7 @@ h2 { text-align: center; margin-bottom: 30px; color: #150d3e; }
 <?php endif; ?>
 
 <?php if($privilegio == 'admin'): ?>
-<!-- Formulario agregar usuario -->
+
 <div class="form-card">
 <form method="POST" class="row g-3">
     <div class="col-md-6">
@@ -155,7 +154,7 @@ h2 { text-align: center; margin-bottom: 30px; color: #150d3e; }
 </div>
 <?php endif; ?>
 
-<!-- Tabla usuarios -->
+
 <table class="table table-striped table-hover">
 <thead>
 <tr>
