@@ -2,7 +2,6 @@
 session_start();
 require_once "conexion.php";
 
-// Configuración y propiedades
 $sqlConfig = "SELECT * FROM configuracion LIMIT 1";
 $resConfig = $conect->query($sqlConfig);
 $config = $resConfig->fetch_assoc();
@@ -185,7 +184,7 @@ $resPropiedades = $conect->query($sqlPropiedades);
         <a href="<?php echo $config['twitter']; ?>" target="_blank"><i class="bi bi-twitter text-white"></i></a>
     </div>
     <div style="position: absolute; top:10px; right:30px; z-index:10;">
-        <form class="d-flex" role="search" method="GET" action="index.php">
+        <form class="d-flex" role="search" method="GET" action="resultados.php">
             <div class="input-group" style="width:250px;">
                 <input type="text" name="buscar" class="form-control" placeholder="Buscar propiedades..." style="height:35px;">
                 <button class="btn btn-light" type="submit" style="height:35px;">
